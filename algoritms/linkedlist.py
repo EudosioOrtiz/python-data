@@ -67,16 +67,92 @@ class LinkedList:
             itr = itr.next
             count+=1
 
+    def insert_at(self, index, data):
+        if index < 0  or index > self.get_length():
+            raise Exception("invalid index")
+        
+        if index == 0:
+            self.insert_at_begining(data)
+            return
+        
+        count = 0 
+        itr = self.head
+        while itr:
+            if count == index - 1:
+                node = Node(data, itr.next)
+                itr.next = node
+                break
+
+            itr = itr.next
+            count+=1
+
+    def insert_after_value(self, data_after, data_to_insert):
+        # Search for first occurance of data_after value in linked list
+        # Now insert data_to_insert after data_after node
+        if self.head is None:
+            return
+
+        if data_after is None or data_to_insert is None:
+            raise Exception("invalid inputs")
+            return
+
+        if self.head.data==data_after:
+            self.head.next = Node(data_to_insert,self.head.next)
+            return
+
+        itr = self.head
+        while itr:
+            if itr.data == data_after:
+                itr.next =  Node(data_to_insert, itr.next)                 
+                break
+
+            itr = itr.next
+    
+    def remove_by_value(self, data):
+        if self.head is None:
+            return
+        
+        if data is None:
+            raise Exception("invalid input")
+            return
+
+        if self.head.data == data:
+            self.head = self.head.next
+            return
+
+        itr = self.head
+        while itr.next:
+            if itr.next.data == data:
+                itr.next = itr.next.next
+                break
+
+            itr = itr.next
+   
+        # Remove first node that contains data
+    
 
 if __name__ == '__main__':
     ll = LinkedList()
     ll.insert_at_begining(5)
-    ll.insert_at_begining(45)
-    ll.insert_at_begining(34)
-    ll.insert_at_begining(69)
     ll.insert_values(["banana","mango","grapes","orange"])
     ll.insert_at_end(67)
     ll.print()
     print("length: ",ll.get_length())
     ll.remove_at(1)
+    ll.print()
+    ll.insert_at(1,"fresa")
+    ll.print()
+    print("/////////")
+    ll.insert_values(["banana","mango","grapes","orange"])
+    ll.print()
+    ll.insert_after_value("mango","apple")
+    ll.print()
+    ll.remove_by_value("orange")
+    ll.print()
+    ll.remove_by_value("figs")
+    ll.print()
+    ll.remove_by_value("banana")
+    ll.remove_by_value("mango")
+    ll.remove_by_value("apple")
+    ll.remove_by_value("grapes")
     ll.print()
