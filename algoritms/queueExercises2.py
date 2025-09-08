@@ -19,7 +19,7 @@ class Queue:
     
     def size(self):
         return len(self.buffer)
-def front(self):
+    def front(self):
         return self.buffer[-1]
 
 def produce_binary_numbers(n):
