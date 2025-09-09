@@ -1,23 +1,23 @@
-def merge_sort(arr):
+def merge_sort(arr, key):
     if len(arr) <= 1:
         return arr
 
     mid = len(arr)//2
     left = arr[:mid]
     right = arr[mid:]
-    merge_sort(left)
-    merge_sort(right)
+    merge_sort(left, key)
+    merge_sort(right, key)
 
-    return merge_two_sorted_lists(left,right, arr)
+    return merge_two_sorted_lists(left,right, arr, key)
 
-def merge_two_sorted_lists(a,b, arr):
+def merge_two_sorted_lists(a,b, arr , key):
     sorted_list = []
     len_a = len(a)
     len_b = len(b)
     i = j = k = 0
 
     while i < len_a and j < len_b:
-        if a[i] <= b[j]:
+        if a[i][key] <= b[j][key]:
             arr[k] = a[i]
             i+=1
         else:
@@ -43,6 +43,16 @@ if __name__ == '__main__':
         [1,2,3,4,5]
     ]
 
+    elements = [
+        { 'name': 'vedanth',   'age': 17, 'time_hours': 1},
+        { 'name': 'rajab', 'age': 12,  'time_hours': 3},
+        { 'name': 'vignesh',  'age': 21,  'time_hours': 2.5},
+        { 'name': 'chinmay',  'age': 24,  'time_hours': 1.5},
+    ]
+    '''
     for arr in test_cases:
         merge_sort(arr)
         print(arr)
+    '''
+    merge_sort(elements,'time_hours')
+    print(elements)
