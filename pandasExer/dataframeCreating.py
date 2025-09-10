@@ -1,10 +1,10 @@
 import pandas as pd
 #Using csv
-df = pd.read_csv('weather_data.csv')
-print(df)
+df = pd.read_csv('./pandasExer/weather_data.csv')
+#print(df)
 #Using excel
-df2 = pd.read_excel('weather_data.xlsx','Sheet1')
-print(df2)
+df2 = pd.read_excel('./pandasExer/weather_data.xlsx','Sheet1')
+#print(df2)
 
 #Using dictionary
 
@@ -24,7 +24,7 @@ weather_data = {
     'event': ['Rain', 'Sunny', 'Snow']
 }
 df3 = pd.DataFrame(weather_data)
-print(df3)
+#print(df3)
 
 #Using tuples list
 weather_data = [
@@ -33,7 +33,7 @@ weather_data = [
     ('1/3/2017',28,2,'Snow')
 ]
 df = pd.DataFrame(data=weather_data, columns=['day','temperature','windspeed','event'])
-print(df)
+#print(df)
 
 #Using list of dictionaries
 weather_data = [
@@ -43,4 +43,4 @@ weather_data = [
     
 ]
 df = pd.DataFrame(data=weather_data, columns=['day','temperature','windspeed','event'])
-print(df)
+#print(df)

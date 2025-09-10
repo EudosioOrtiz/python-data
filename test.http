@@ -1,0 +1,20 @@
+POST http://localhost:3000/LiveLocation/New HTTP/1.1
+Content-Type: application/json
+{
+    "service_Name": "ETL",
+    "latitude":"25.534854",
+    "longitute": "-103.357511",
+    "idInformation": "",
+    "type": "Order",
+    "transport": "Car",
+    "route": {
+        "origin": {
+            "latitude": "25.535606",
+            "longitute": "-103.466332"
+        },
+        "destination": {
+            "latitude": "25.670819",
+            "longitute": "-100.427730"
+        }
+    }
+}
