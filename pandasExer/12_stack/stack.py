@@ -1,6 +1,6 @@
 #Reshape dataframe using stack/unstack
 import pandas as pd
-df = pd.read_excel("stocks.xlsx",header=[0,1])
+df = pd.read_excel("stocks.xlsx",header=[0,1]) # the header paramenter alow you yo use two level of headers
 df
 '''
 Price	Price to earnings ratio (P/E)
@@ -31,7 +31,7 @@ Microsoft	61	30.11
 Google	1012	30.00
 Microsoft	66	31.00
 '''
-df.stack(level=0)
+df.stack(level=0) # you can chose the level that you want to stack in this case was the level 1 
 '''
 Company	Facebook	Google	Microsoft
 2017-06-05	Price	155.00	955.0	66.00
@@ -77,7 +77,7 @@ Company	Facebook	Google	Microsoft	Facebook	Google	Microsoft
 2017-06-09	156	1012	66	37.07	30.0	31.00
 3 levels of column headers
 '''
-df2 = pd.read_excel("stocks_3_levels.xlsx",header=[0,1,2])
+df2 = pd.read_excel("stocks_3_levels.xlsx",header=[0,1,2]) # in this case we are using 3 levels of headers
 df2
 '''
 Price Ratios	Income Statement
@@ -89,7 +89,7 @@ Q3 2016	153	963	62	36.78	31.7	30.46	4.3	24	21.45	1.20	6.10	5.43
 Q4 2016	155	1000	61	36.11	31.2	30.11	6.7	26	21.88	1.67	6.50	5.89
 Q1 2017	156	1012	66	37.07	30.0	31.00	8.1	31	22.34	2.03	6.40	6.09
 '''
-df2.stack()
+df2.stack() #always use the last level has default
 '''
 Income Statement	Price Ratios
 Net Profit	Net Sales	Price	Price to earnings ratio (P/E)

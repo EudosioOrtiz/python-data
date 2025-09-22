@@ -1,6 +1,6 @@
 #Pandas Time Series Tutorial: DateTimeIndex
 import pandas as pd
-df = pd.read_csv("aapl.csv",parse_dates=["Date"], index_col="Date")
+df = pd.read_csv("aapl.csv",parse_dates=["Date"], index_col="Date") # when you convert to datatime index you can use useful indexes to manage the data
 df.head(2)
 '''
 Open	High	Low	Close	Volume

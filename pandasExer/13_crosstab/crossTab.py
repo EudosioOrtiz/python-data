@@ -17,7 +17,7 @@ Name	Nationality	Sex	Age	Handedness
 10	Juan	China	Female	58	Left
 11	Liang	China	Male	43	Left
 '''
-pd.crosstab(df.Nationality,df.Handedness)
+pd.crosstab(df.Nationality,df.Handedness) # croostab allow you to create quick tables with counts of the fileds that you indicate
 '''
 Handedness	Left	Right
 Nationality		
@@ -43,7 +43,7 @@ Male	5	2	7
 All	7	5	12
 Multi Index Column and Rows
 '''
-pd.crosstab(df.Sex, [df.Handedness,df.Nationality], margins=True)
+pd.crosstab(df.Sex, [df.Handedness,df.Nationality], margins=True) #you can use multiples values 
 '''
 Handedness	Left	Right	All
 Nationality	Bangadesh	China	India	USA	China	India	USA	
@@ -52,7 +52,7 @@ Female	1	1	0	0	1	0	2	5
 Male	1	1	2	1	0	1	1	7
 All	2	2	2	1	1	1	3	12
 '''
-pd.crosstab([df.Nationality, df.Sex], [df.Handedness], margins=True)
+pd.crosstab([df.Nationality, df.Sex], [df.Handedness], margins=True) 
 '''
 Handedness	Left	Right	All
 Nationality	Sex			
@@ -66,7 +66,7 @@ Male	1	1	2
 All		7	5	12
 Normalize
 '''
-pd.crosstab(df.Sex, df.Handedness, normalize='index')
+pd.crosstab(df.Sex, df.Handedness, normalize='index') # also you can normalize the data and give the percentage of every case
 '''
 Handedness	Left	Right
 Sex		
@@ -75,7 +75,7 @@ Male	0.714286	0.285714
 '''
 ##Aggfunc and Values
 import numpy as np
-pd.crosstab(df.Sex, df.Handedness, values=df.Age, aggfunc=np.average)
+pd.crosstab(df.Sex, df.Handedness, values=df.Age, aggfunc=np.average) # you can configure row and columns and aolse indicate the values that you want and that values can handle it with some function
 '''
 Handedness	Left	Right
 Sex		

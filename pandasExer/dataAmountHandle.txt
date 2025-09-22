@@ -1,0 +1,62 @@
+https://pythonspeed.com/articles/pandas-load-less-data/
+https://pythonspeed.com/datascience/#memory
+
+In this article I’ll show you how to reduce the memory your DataFrame uses at the time it is initially loaded, using four different techniques:
+
+Dropping columns
+Lower-range numerical dtypes.
+Categoricals.
+Sparse columns.
+
+Technique #1: Don’t load all the columns
+
+Technique #2: Shrink numerical columns with smaller dtypes
+Another technique can help reduce the memory used by columns that contain only numbers.
+
+Each column in a Pandas DataFrame is a particular data type (dtype). For example, for integers there is the int64 dtype, int32, int16, and more.
+
+Why does the dtype matter? First, because it affects what values you can store in that column:
+
+int8 can store integers from -128 to 127.
+int16 can store integers from -32768 to 32767.
+int64 can store integers from -9223372036854775808 to 9223372036854775807.
+
+echnique #3: Shrink categorical data using Categorical dtypes
+What about non-numerical data? In some cases you can shrink those columns as well.
+
+In the voter registration database I am using as an example there is a column for party affiliation, by default parsed as a string, with only a fixed number of values in it. Political parties don’t get formed overnight, after all.
+
+>>> set(df["Party Affiliation "])
+{'Q ', 'S ', 'L ', 'R ', 'H ', 'BB', 'D ', 'K ', 'O ', 'X ', 'A ', 'Z ', 'EE', 'F ', 'P ', 'G ', 'T ', 'CC', 'J ', 'AA', 'Y ', 'U '}
+>>> df["Party Affiliation "].memory_usage(index=False, deep=True)
+4061324
+Even though the values are limited to a specific set, they are still stored as arbitrary strings, which have overhead in memory. Imagine a gender column that only says "FEMALE", "MALE", and "NON-BINARY" over and over again—that’s a lot of memory being used to store the same three strings.
+
+A more compact representation for data with only a limited number of values is a custom dtype called Categorical, whose memory usage is tied to the number of different values.
+
+When we load the CSV, we can specify that a particular column uses this dtype, and the resulting memory usage is much smaller, 69KB instead of 550KB:
+
+
+Technique #4: Sparse series
+If you have a column with lots of empty values, usually represented as NaNs, you can save memory by using a sparse column representation. It won’t waste memory storing all those empty values.
+
+For example, three quarters of this column are empty values:
+
+>>> df = pd.read_csv("voters.csv")
+>>> series = df["Mailing Address - Apartment Number "]
+>>> series.memory_usage(index=False, deep=True)
+2623975
+>>> len(series)
+68836
+>>> len(series.dropna())
+13721
+We can convert the series to a sparse series, and then it’ll use less memory:
+
+>>> sparse_series = series.astype("Sparse[str]")
+>>> len(sparse_series)
+68836
+>>> sparse_series.memory_usage(index=False, deep=True)
+2237939
+In this case the memory savings aren’t huge (2.6MB → 2.2MB), but there is some saving; for integers or other number-like types the savings would be more significant.
+
+Unfortunately it’s not yet possible to use read_csv() to load a column directly into a sparse dtype.
