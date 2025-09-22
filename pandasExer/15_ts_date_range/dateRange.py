@@ -1,4 +1,4 @@
-Pandas Time Series Analysis Tutorial: date_range
+#Pandas Time Series Analysis Tutorial: date_range
 import pandas as pd
 df = pd.read_csv("aapl_no_dates.csv")
 df.head()
@@ -10,7 +10,7 @@ Open	High	Low	Close	Volume
 3	153.90	155.81	153.78	154.45	26624926
 4	155.02	155.98	154.48	155.37	21069647
 '''
-rng = pd.date_range(start="6/1/2016",end="6/30/2016",freq='B')# you can create your own datetime index and asign it to your data as index
+rng = pd.date_range(start="6/1/2016",end="6/30/2016",freq='B')# you can create your own datetime index and asign it to your data as index using the business days
 rng
 '''
 DatetimeIndex(['2016-06-01', '2016-06-02', '2016-06-03', '2016-06-06',
@@ -32,7 +32,7 @@ Open	High	Low	Close	Volume
 2016-06-07	155.02	155.98	154.48	155.37	21069647
 Finding missing dates from datetimeindex
 '''
-daily_index = pd.date_range(start="6/1/2016",end="6/30/2016",freq='D')
+daily_index = pd.date_range(start="6/1/2016",end="6/30/2016",freq='D')# you can create your own datetime index and asign it to your data as index using all the days
 daily_index
 '''
 DatetimeIndex(['2016-06-01', '2016-06-02', '2016-06-03', '2016-06-04',
@@ -45,7 +45,7 @@ DatetimeIndex(['2016-06-01', '2016-06-02', '2016-06-03', '2016-06-04',
                '2016-06-29', '2016-06-30'],
               dtype='datetime64[ns]', freq='D')
 '''
-daily_index.difference(df.index)
+daily_index.difference(df.index) # you can obtain the difference of two date indexes
 '''
 DatetimeIndex(['2016-06-04', '2016-06-05', '2016-06-11', '2016-06-12',
                '2016-06-18', '2016-06-19', '2016-06-25', '2016-06-26'],
@@ -179,8 +179,8 @@ Open	High	Low	Close	Volume
 697 rows × 5 columns
 '''
 
-generating DatetimeIndex with periods argument
-rng = pd.date_range('1/1/2011', periods=72, freq='H')
+#generating DatetimeIndex with periods argument
+rng = pd.date_range('1/1/2011', periods=72, freq='H') # you can generate date ranges without the end date only using the periods and the frecuency
 rng
 '''
 DatetimeIndex(['2011-01-01 00:00:00', '2011-01-01 01:00:00',
@@ -222,7 +222,7 @@ DatetimeIndex(['2011-01-01 00:00:00', '2011-01-01 01:00:00',
               dtype='datetime64[ns]', freq='H')
 '''
 import numpy as np
-ts = pd.Series(np.random.randint(0,10,len(rng)), index=rng)
+ts = pd.Series(np.random.randint(0,10,len(rng)), index=rng) #you can generate values for the indexes that you created before
 ts.head(20)
 '''
 2011-01-01 00:00:00    9
